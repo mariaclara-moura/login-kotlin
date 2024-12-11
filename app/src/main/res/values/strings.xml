@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Login Cin</string>
+    <string name="login">Login</string>
+    <string name="Email">Email</string>
+    <string name="bem_vindo">Bem vindo!</string>
+    <string name="cin_logo">Logo do Centro de Informatica - UFPE </string>
+    <string name="Senha">Senha</string>
+    <string name="user">User</string>
+    <string name="logged_in">Logged in</string>
+</resources>
