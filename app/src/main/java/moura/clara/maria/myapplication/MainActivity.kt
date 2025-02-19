@@ -8,11 +8,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
 import moura.clara.maria.myapplication.ui.theme.ThirdClassTheme
 import moura.clara.maria.myapplication.databinding.ActivityMainBinding
 import java.util.Date
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var database: RoomDB_ThirdClass
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +35,29 @@ class MainActivity : ComponentActivity() {
             }
             else
                 Toast.makeText(this, "inavlid credentials", Toast.LENGTH_LONG).show()
-
-
         }
+
+        database = Room.databaseBuilder(applicationContext,
+            RoomDB_ThirdClass::class.java,
+            "thirdClassDB").build()
+
     }
+
+    suspend fun InsertThirdClass(thirdClass: RoomEntity_ThirdClass) {
+        database.thirdClassDao().insert(thirdClass)
+    }
+
+    suspend fun GetByUsername(username: String): RoomEntity_ThirdClass {
+        return database.thirdClassDao().getByUsername(username)
+    }
+
+    suspend fun UpdatePwd(username: String, password: String) {
+        return database.thirdClassDao().updatePwd(username, password)
+    }
+
     private fun checkCredentials(email: String, password: String):Boolean{
         return email == "admin@cin.ufpe.br" && password == "admin"
     }
-
 
 }
 
